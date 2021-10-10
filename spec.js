@@ -157,7 +157,7 @@
           });
           it('should return total sum of all prices', function() {
             var total = sumTotal(testGrocery);
-            expect(total).to.equal(126.72);
+            expect(total).to.equal(173.98);
           });
         });
       });

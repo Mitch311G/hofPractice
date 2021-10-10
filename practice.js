@@ -23,9 +23,16 @@ var moreFruits = function(fruits) {
 // use _.each to traverse the number array and determine
 // which are multiples of five.
 var multiplesOfFive = function(numbers) {
+  // var result = 0;
+  // _.each(numbers, function(number, index, collection) {
+  //   if (number.toString().indexOf('0') !== -1 || number.toString().indexOf('5') !== -1) {
+  //     result++;
+  //   }
+  // });
+  // return result;
   var result = 0;
   _.each(numbers, function(number, index, collection) {
-    if (number.toString().indexOf('0') !== -1 || number.toString().indexOf('5') !== -1) {
+    if (Math.floor(number / 5) === number / 5) {
       result++;
     }
   });
@@ -40,18 +47,26 @@ var multiplesOfFive = function(numbers) {
 
 // use _.filter to return the fruits array with only the desired fruit.
 var onlyOneFruit = function(fruits, targetFruit) {
-
+  return _.filter(fruits, function(fruit) {
+    return fruit === targetFruit;
+  });
 };
 
 // use _.filter to return the fruits array with only fruits
 // starting with the letter 'P'.
 var startsWith = function(fruits, letter) {
-
+  return _.filter(fruits, function(fruit) {
+    if (fruit[0].toLowerCase() === letter) {
+      return true;
+    }
+  });
 };
 
 // return a filtered array containing only cookie-type desserts.
 var cookiesOnly = function(desserts) {
-
+  return _.filter(desserts, function(dessert) {
+    return dessert.type === 'cookie';
+  });
 };
 
 /*
@@ -62,7 +77,9 @@ var cookiesOnly = function(desserts) {
 
 // return the total price of all products.
 var sumTotal = function(products) {
-
+  return _.reduce(products, function(total, item) {
+    return total + Number(item.price.slice(1));
+  }, 0);
 };
 
 // return an object consisting of dessert types and how many of each.
