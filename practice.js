@@ -85,21 +85,38 @@ var sumTotal = function(products) {
 // return an object consisting of dessert types and how many of each.
 // exampleOutput: { dessertType: 3, dessertType2: 1 }
 var dessertCategories = function(desserts) {
-
+  return _.reduce(desserts, function(dessertTypes, dessert) {
+    if (dessertTypes[dessert.type] === undefined) {
+      dessertTypes[dessert.type] = 1;
+    } else {
+      dessertTypes[dessert.type]++;
+    }
+    return dessertTypes;
+  }, {});
 };
 
 // given an array of movie data objects,return an array containing
 // movies that came out between 1990 and 2000.
 // TIP: use an array as your accumulator - don't push to an external array!
 var ninetiesKid = function(movies) {
-
+  return _.reduce(movies, function(ninetiesMovies, movie) {
+    if (movie.releaseYear < 2000 && movie.releaseYear > 1990) {
+      ninetiesMovies.push(movie.title);
+    }
+    return ninetiesMovies;
+  }, []);
 };
 
 // return an boolean stating if there exists a movie with a shorter
 // runtime than your time limit.
 // timeLimit is an integer representing a number of minutes.
 var movieNight = function(movies, timeLimit) {
-
+  return _.reduce(movies, function(bool, movie) {
+    if (movie.runtime < timeLimit) {
+      bool = true;
+    }
+    return bool;
+  }, false);
 };
 
 /*
@@ -111,14 +128,23 @@ var movieNight = function(movies, timeLimit) {
 // given an array of strings, use _.map to return a new array containing all
 // strings converted to uppercase letters.
 var upperCaseFruits = function(fruits) {
-
+  return _.map(fruits, function(fruit) {
+    return fruit.toUpperCase();
+  });
 };
 
 // given an array of dessert objects, return a new array of objects
 // that have a new "glutenFree" property, with a boolean value.
 // TIP: Items that contain flour are not gluten-free.
 var glutenFree = function(desserts) {
-
+  return _.map(desserts, function(dessert) {
+    if (dessert.ingredients.indexOf('flour') !== -1) {
+      dessert.glutenFree = false;
+    } else {
+      dessert.glutenFree = true;
+    }
+    return dessert;
+  });
 };
 
 // use _.map to return an array of items with their sale prices, with a new property
